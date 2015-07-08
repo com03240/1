@@ -1,0 +1,25 @@
+select#ex_select {
+	width: 100%;
+}
+
+input#ex_label {
+	width: 100%;
+}
+
+div#ex_viewport
+{
+	width: 250px;
+}
+
+textarea#ex_editor 
+{
+	width: 100%;
+	height: 250px;
+	font-family: monospace;
+}
+
+div#ex_buttons {
+	text-align: center;
+}
+
+
