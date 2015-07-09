@@ -1,63 +1,73 @@
 document.addEventListener("DOMContentLoaded", function(event) {
 	console.log("ready!");
 	
-	chrome.storage.local.get(null, function(obj) {
-		console.log(obj);
-		var ex_select = document.getElementById("ex_select");
-		for (var key in obj) {
-			var option = document.createElement("option");
-			option.text = key;
-			ex_select.add(option);
+	var sel = document.getElementById("ex_select");
+	var lab = document.getElementById("ex_label");
+	var vim = document.getElementById("ex_editor");
+	
+	chrome.storage.local.get("scripts", function(obj) {
+		for (var key in obj.scripts) {
+			add_option(key);
 		}
-		if (ex_select.options.length > 0) {
-			var ex_label = document.getElementById("ex_label");
-			var ex_script = document.getElementById("ex_editor");
-			ex_label.value = ex_select.options[ex_select.selectedIndex].value;
-			console.log(obj);
-			ex_script.value = obj[ex_label.value];
+		var idx = sel.selectedIndex;
+		if (idx > -1) {
+			lab.value = sel.options[idx].value;
+			vim.value = obj.scripts[lab.value];
 		}
 	});
 	
-	document.getElementById("ex_select").onchange = function(event) {
-		document.getElementById("ex_label").value = event.target.value;
-		chrome.storage.local.get(null, function(obj) {
-			document.getElementById("ex_editor").value = obj[event.target.value];
-		});
-	};
+	function get_popup_data() {
+		var idx = sel.selectedIndex;
+		return {
+			"sel": (sel > -1) ? sel.options[idx].value : null,
+			"lab": lab.value,
+			"vim": vim.value
+		};
+	}
 	
-	document.getElementById("ex_run").onclick = function(event) {
-		var ex_script_str = document.getElementById("ex_editor").value;
-		var commands = parse_script(ex_script_str);
-		console.log(commands);
+	function add_option(text) {
+		var option = document.createElement("option");
+		option.text = text;
+		sel.add(option);
+	}
+	
+	sel.onchange = function(event) {
+		chrome.storage.local.get({"scripts": {}}, function(obj) {
+			lab.value = event.target.value;
+			vim.value = obj.scripts[lab.value];
+		});
 	}
 	
 	document.getElementById("ex_save").onclick = function(event) {
-		chrome.storage.local.get(null, function(obj) {
-			var key = document.getElementById("ex_label").value;
-			var val = document.getElementById("ex_editor").value;
-			obj[key] = val;
+		var data = get_popup_data();
+		chrome.storage.local.get({"scripts": {}}, function(obj) {
+			obj.scripts[data.lab] = data.vim;
 			chrome.storage.local.set(obj, function() {
-				console.log("save: " + key);
-				var option = document.createElement("option");
-				option.text = key;
-				var ex_select = document.getElementById("ex_select");
-				var selected = ex_select.options[ex_select.selectedIndex].value;
-				ex_select.add(option)
-				ex_select.value = key;
+				if (data.lab !== sel.options[sel.selectedIndex].value) {
+					add_option(data.lab);
+					sel.value = data.lab;
+				}
 			});
 		});
 	}
 	
 	document.getElementById("ex_clear").onclick = function(event) {
-		document.getElementById("ex_editor").value = "";
+		vim.value = "";
 	}
 	
 	document.getElementById("ex_delete").onclick = function(event) {
-		chrome.storage.local.get(null, function(obj) {
-			var key = document.getElementById("ex_label").value;
-			delete obj[key];
+		var data = get_popup_data();
+		chrome.storage.local.get({"scripts": {}}, function(obj) {
+			delete obj.scripts[data.lab];
 			chrome.storage.local.set(obj, function() {
-				console.log("delete: " + key);
+				sel.remove(sel.selectedIndex);
+				if (sel.options.length > 0) {
+					var event = {
+						"target": { "value": sel.options[0].value }
+					}
+					console.log(event);
+					sel.onchange(event);
+				}
 			});
 		});
 	}
