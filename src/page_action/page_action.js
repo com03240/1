@@ -43,7 +43,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
 		chrome.storage.local.get({"scripts": {}}, function(obj) {
 			obj.scripts[data.lab] = data.vim;
 			chrome.storage.local.set(obj, function() {
-				if (data.lab !== sel.options[sel.selectedIndex].value) {
+				var idx = sel.selectedIndex;
+				if (idx === -1 || data.lab !== sel.options[idx].value) {
 					add_option(data.lab);
 					sel.value = data.lab;
 				}
@@ -65,8 +66,10 @@ document.addEventListener("DOMContentLoaded", function(event) {
 					var event = {
 						"target": { "value": sel.options[0].value }
 					}
-					console.log(event);
 					sel.onchange(event);
+				} else {
+					lab.value = "";
+					vim.value = "";
 				}
 			});
 		});
