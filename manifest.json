@@ -30,6 +30,7 @@
 				"https://www.youtube.com/*"
 			],
 			"js": [
+				"js/exscript.js",
 				"src/inject/inject.js"
 			]
 		}

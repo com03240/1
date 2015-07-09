@@ -20,11 +20,11 @@ function process_time(token) {
 	return seconds;
 }
 
-function parse_script(script) {
+function parse_exscript(script) {
 	var commands = [];
 	// for each line
-	script.split(/\n/).forEach(function(line) {
-		var command = {};
+	script.split(/[\n;]/).forEach(function(line) {
+		var command = { "loops": 1 };
 		// process comments
 		if (/#/.test(line)) {
 			line = /#/.test(line) ? line.slice(0, line.indexOf("#")) : line;
@@ -49,15 +49,37 @@ function parse_script(script) {
 				command.time2 = time2;
 			}
 			// process loops
-			else if (/\s*\d+[xX]\s*$/.test(token)) {
+			else if (/^\s*\d+[xX]\s*$/.test(token)) {
 				command.loops = parseInt(token.slice(0, token.length - 1));
 			} 
 			// process speed
-			else if (/\s*\d+%\s*$/.test(token)) {
-				command.speed = parseInt(token.slice(0, token.length - 1));
+			else if (/^\s*\d+%\s*$/.test(token)) {
+				command.speed = parseInt(token.slice(0, token.length - 1)) / 100.0;
 			} 
 		});
 		commands.push(command);
 	});
 	return commands;
 }
+
+function eval_exscript(commands, video) {
+	console.log(commands);
+	video.currentTime = commands[0].time1;
+	video.playbackRate = commands[0].speed;
+	var interval = setInterval(function() {
+		if (video.currentTime > commands[0].time2) {
+			console.log(commands[0].loops);
+			if (--(commands[0].loops) > 0) {
+				video.currentTime = commands[0].time1;
+			}
+			else {
+				commands.shift();
+			}
+			if (commands.length === 0) {
+				clearInterval(interval);
+			}
+		}
+	}, 250);
+}
+
+
