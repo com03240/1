@@ -74,9 +74,12 @@ function eval_exscript(commands, video) {
 			}
 			else {
 				commands.shift();
-			}
-			if (commands.length === 0) {
-				clearInterval(interval);
+				if (commands.length === 0) {
+					clearInterval(interval);
+				} else {
+					video.currentTime = commands[0].time1;
+					console.log("done");
+				}
 			}
 		}
 	}, 250);
