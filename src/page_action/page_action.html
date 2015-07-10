@@ -7,18 +7,18 @@
 </head>
 <body>
 <div id="ex_viewport">
-	script:
-	<div>
+	<h2 class="title">ExScript</h2>
+	<div id="script-controls">
+		<label for="ex_select">Script</label>
 		<select id="ex_select"></select>
-	</div>
-	name:
-	<div>
+		<label for="ex_label">Name:</label>
 		<input id="ex_label"></select>
 	</div>
-	editor:
-	<div>
-		<textarea id="ex_editor"></textarea>
+	<div id="script-body">
+		<h5>Editor:</h5>
+		<textarea id="ex_editor" placeholder="[mm:ss]-[mm:ss] <count>x <speed>%"></textarea>
 	</div>
+
 	<div id="ex_buttons">
 		<button type="button" id="ex_run">RUN</button>
 		<button type="button" id="ex_save">SAVE</button>
