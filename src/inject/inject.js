@@ -15,7 +15,6 @@ chrome.extension.sendMessage({}, function(response) {
 chrome.runtime.onMessage.addListener(function(message) {
 	var exscript = parse_exscript(message);
 	var video = document.getElementsByTagName("video")[0];
-	video.play();
 	eval_exscript(exscript, video);
 });
 
