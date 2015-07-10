@@ -76,29 +76,32 @@ function parse_exscript(script) {
 
 function eval_exscript(commands, video) {
 	console.log(commands);
-	// update video properties
-	video.currentTime = commands[0].time1;
-	video.playbackRate = commands[0].speed;
-	var interval = setInterval(function() {
-		// process video state
-		if (video.currentTime > commands[0].time2) {
-			console.log(commands[0].loops);
-			if (--(commands[0].loops) > 0) {
-				video.currentTime = commands[0].time1;
-			}
-			else {
-				commands.shift();
-				if (commands.length === 0) {
-					clearInterval(interval);
-					console.log("eval_exscript > done");
-				} else {
-					// update video properties
+	if (commands.length > 0) {
+		video.play();
+		// update video properties
+		video.currentTime = commands[0].time1;
+		video.playbackRate = commands[0].speed;
+		var interval = setInterval(function() {
+			// process video state
+			if (video.currentTime > commands[0].time2) {
+				console.log(commands[0].loops);
+				if (--(commands[0].loops) > 0) {
 					video.currentTime = commands[0].time1;
-					video.playbackRate = commands[0].speed;
+				}
+				else {
+					commands.shift();
+					if (commands.length === 0) {
+						clearInterval(interval);
+						console.log("eval_exscript > done");
+					} else {
+						// update video properties
+						video.currentTime = commands[0].time1;
+						video.playbackRate = commands[0].speed;
+					}
 				}
 			}
-		}
-	}, 250);
+		}, 250);
+	}
 }
 
 
