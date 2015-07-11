@@ -76,12 +76,13 @@ function parse_exscript(script) {
 
 function eval_exscript(commands, video) {
 	console.log(commands);
+	var interval = null;
 	if (commands.length > 0) {
 		video.play();
 		// update video properties
 		video.currentTime = commands[0].time1;
 		video.playbackRate = commands[0].speed;
-		var interval = setInterval(function() {
+		interval = setInterval(function() {
 			// process video state
 			if (video.currentTime > commands[0].time2) {
 				console.log(commands[0].loops);
@@ -102,6 +103,7 @@ function eval_exscript(commands, video) {
 			}
 		}, 250);
 	}
+	return interval;
 }
 
 

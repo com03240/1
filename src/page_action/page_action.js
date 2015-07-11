@@ -3,18 +3,34 @@ document.addEventListener("DOMContentLoaded", function(event) {
 	var script_name = document.getElementById("ex_label");
 	var script_text = document.getElementById("ex_editor");
 
-	var currentUrl = '';
+	var current_tab = null;
 
-	chrome.storage.local.get("scripts", function(obj) {
-		chrome.tabs.getSelected(null,function(tab) {
-			currentUrl = tab.url;
-			for (var name in obj.scripts[currentUrl]) {
+	function get_video_id(url) {
+		var v = null;
+		url.slice(url.indexOf("?") + 1).split("&").forEach(function(param) {
+			var tokens = param.split("=");
+			v = (tokens[0] == "v") ? tokens[1] : v;
+		});
+		return v;
+	}
+
+	// init
+	chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+		console.log("init >");
+		current_tab = tabs[0];
+		var key = get_video_id(current_tab.url);
+		var query = {};
+		query[key] = {};
+		query[key]["scripts"] = {};
+		console.log("query: " + JSON.stringify(query));
+		chrome.storage.sync.get(query, function(obj) {
+			for (var name in obj[key]["scripts"]) {
 				add_option(name);
 			}
-			var idx = select.selectedIndex;
-			if (idx > -1) {
-				script_name.value = select.options[idx].value;
-				script_text.value = obj.scripts[currentUrl][script_name.value];
+			var data = get_popup_data();
+			if (data.selected !== null) {
+				script_name.value = data.selected;
+				script_text.value = obj[key]["scripts"][data.selected];
 			}
 		});
 	});
@@ -22,7 +38,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 	function get_popup_data() {
 		var idx = select.selectedIndex;
 		return {
-			"select": (select > -1) ? select.options[idx].value : null,
+			"selected": (idx > -1) ? select.options[idx].value : null,
 			"script_name": script_name.value,
 			"script_text": script_text.value
 		};
@@ -35,9 +51,16 @@ document.addEventListener("DOMContentLoaded", function(event) {
 	}
 
 	select.onchange = function(event) {
-		chrome.storage.local.get({"scripts": {}}, function(obj) {
+		console.log("onchange >");
+		var key = get_video_id(current_tab.url);
+		var query = {};
+		query[key] = {};
+		query[key]["scripts"] = {};
+		console.log(query);
+		chrome.storage.sync.get(query, function(obj) {
+			console.log(obj);
 			script_name.value = event.target.value;
-			script_text.value = obj.scripts[currentUrl][script_name.value];
+			script_text.value = obj[key]["scripts"][event.target.value];
 		});
 	};
 
@@ -48,15 +71,19 @@ document.addEventListener("DOMContentLoaded", function(event) {
 	};
 
 	document.getElementById("ex_save").onclick = function(event) {
-		var data = get_popup_data();
-		chrome.storage.local.get({"scripts": {}}, function(obj) {
-			var item = obj.scripts[currentUrl];
-			item[data.script_name] = data.script_text;
-			obj.scripts[currentUrl] = item;
-
-			chrome.storage.local.set(obj, function() {
-				var idx = select.selectedIndex;
-				if (idx === -1 || data.script_name !== select.options[idx].value) {
+		console.log("save >");
+		
+		
+		var key = get_video_id(current_tab.url);
+		var query = {};
+		query[key] = {};
+		query[key]["scripts"] = {};
+		console.log("query: " + JSON.stringify(query));
+		chrome.storage.sync.get(query, function(obj) {
+			var data = get_popup_data();
+			obj[key]["scripts"][data.script_name] = data.script_text;
+			chrome.storage.sync.set(obj, function() {
+				if (data.script_name !== data.selected) {
 					add_option(data.script_name);
 					select.value = data.script_name;
 				}
@@ -69,11 +96,14 @@ document.addEventListener("DOMContentLoaded", function(event) {
 	};
 
 	document.getElementById("ex_delete").onclick = function(event) {
-		var data = get_popup_data();
-		chrome.storage.local.get({"scripts": {}}, function(obj) {
-			var config = obj.scripts[currentUrl];
-			delete config[data.script_name];
-			chrome.storage.local.set(obj, function() {
+		var key = get_video_id(current_tab.url);
+		var query = {};
+		query[key] = {};
+		query[key]["scripts"] = {};
+		chrome.storage.sync.get(query, function(obj) {
+			var data = get_popup_data();
+			delete obj[key]["scripts"][data.script_name];
+			chrome.storage.sync.set(obj, function() {
 				select.remove(select.selectedIndex);
 				if (select.options.length > 0) {
 					var event = {
