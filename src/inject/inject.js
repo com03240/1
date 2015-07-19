@@ -12,6 +12,7 @@ chrome.runtime.onMessage.addListener(function(message) {
 		var video = document.getElementsByTagName("video")[0];
 		if (exscript.length > 0) {
 			eval_clear();
+			video.play();
 			eval_exscript(exscript, video);
 		}
 	} else if (message.action === "eval_clear") {
