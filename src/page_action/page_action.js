@@ -1,4 +1,8 @@
 document.addEventListener("DOMContentLoaded", function(event) {
+	// http://stackoverflow.com/a/3560038
+	var imgURL = chrome.extension.getURL("icons/icon48.png");
+	document.getElementById("logo").src = imgURL;
+
 	var select = document.getElementById("ex_select");
 	var script_name = document.getElementById("ex_label");
 	var script_text = document.getElementById("ex_editor");
@@ -64,16 +68,27 @@ document.addEventListener("DOMContentLoaded", function(event) {
 		});
 	};
 
-	document.getElementById("ex_run").onclick = function(event) {
+	document.getElementById("ex_stop").onclick = function(event) {
+		var message = {
+			action: "eval_clear"
+		};
 		chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-			chrome.tabs.sendMessage(tabs[0].id, script_text.value, function(response) {});
+			chrome.tabs.sendMessage(tabs[0].id, message, function(response) {});
+		});
+	};
+
+	document.getElementById("ex_run").onclick = function(event) {
+		var message = {
+			action: "eval_exscript",
+			script: script_text.value
+		};
+		chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+			chrome.tabs.sendMessage(tabs[0].id, message, function(response) {});
 		});
 	};
 
 	document.getElementById("ex_save").onclick = function(event) {
 		console.log("save >");
-		
-		
 		var key = get_video_id(current_tab.url);
 		var query = {};
 		query[key] = {};
@@ -89,10 +104,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
 				}
 			});
 		});
-	};
-
-	document.getElementById("ex_clear").onclick = function(event) {
-		script_text.value = "";
 	};
 
 	document.getElementById("ex_delete").onclick = function(event) {

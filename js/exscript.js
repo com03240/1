@@ -66,44 +66,48 @@ function parse_exscript(script) {
 				command.speed = parseInt(token.slice(0, token.length - 1)) / 100.0;
 			} 
 		});
-		console.log("parse_exscript > command: " + JSON.stringify(command));
 		if (is_valid_command(command)) {
+			command.speed = ("speed" in command) ? command.speed : 1;
+			command.loops = ("loops" in command) ? command.loops : 1;
+			console.log("parse_exscript > command: " + JSON.stringify(command));
 			commands.push(command);
 		}
 	});
 	return commands;
 }
 
+var eval_interval = false;
+
 function eval_exscript(commands, video) {
-	console.log(commands);
-	var interval = null;
-	if (commands.length > 0) {
-		video.play();
-		// update video properties
-		video.currentTime = commands[0].time1;
-		video.playbackRate = commands[0].speed;
-		interval = setInterval(function() {
-			// process video state
-			if (video.currentTime > commands[0].time2) {
-				console.log(commands[0].loops);
-				if (--(commands[0].loops) > 0) {
+	// update video properties
+	video.currentTime = commands[0].time1;
+	video.playbackRate = commands[0].speed;
+	eval_interval = setInterval(function() {
+		// process video state
+		if (video.currentTime > commands[0].time2) {
+			console.log(commands[0].loops);
+			if (--(commands[0].loops) > 0) {
+				video.currentTime = commands[0].time1;
+			}
+			else {
+				commands.shift();
+				if (commands.length === 0) {
+					console.log("eval_exscript > done");
+					eval_clear();
+				} else {
+					// update video properties
 					video.currentTime = commands[0].time1;
-				}
-				else {
-					commands.shift();
-					if (commands.length === 0) {
-						clearInterval(interval);
-						console.log("eval_exscript > done");
-					} else {
-						// update video properties
-						video.currentTime = commands[0].time1;
-						video.playbackRate = commands[0].speed;
-					}
+					video.playbackRate = commands[0].speed;
 				}
 			}
-		}, 250);
-	}
-	return interval;
+		}
+	}, 250);
+	return eval_interval;
+}
+
+function eval_clear() {
+	clearInterval(eval_interval);
+	eval_interval = false;
 }
 
 
