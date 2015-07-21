@@ -6,23 +6,26 @@ chrome.extension.sendMessage({}, function(response) {
 	}, 10);
 });
 
+// this is the controller
 chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
-		var video = document.getElementsByTagName("video")[0];
-	if (message.action === "eval_exscript") {
+	var video = document.getElementsByTagName("video")[0];
+	if (message.action === "exec_exscript") {
 		var exscript = parse_exscript(message.script);
 		if (exscript.length > 0) {
-			eval_clear();
+			exec_clear();
 			video.play();
-			eval_exscript(exscript, video);
+			exec_exscript(exscript, video);
 		}
-	} else if (message.action === "eval_clear") {
-		eval_clear();
+	} else if (message.action === "exec_clear") {
+		exec_clear();
 	} else if (message.action === "is_paused") {
 		sendResponse({ is_paused: video.paused });
 	} else if (message.action == "toggle_play") {
 		video.play();
+		sendResponse({ is_paused: video.paused });
 	} else if (message.action == "toggle_pause") {
 		video.pause();
+		sendResponse({ is_paused: video.paused });
 	}
 });
 
