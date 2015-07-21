@@ -9,24 +9,33 @@
 <div id="ex_viewport">
 	<h2 class="title">
 		<a href="https://github.com/dantony/exscript">
-			<img id="logo" border="0">
+			<img id="logo">
 		</a>
 	</h2>
-	<div id="script-controls">
-		<label for="ex_select">Script</label>
+	<div class="script-controls">
+		<label for="ex_select">Script:</label>
 		<select id="ex_select"></select>
+	</div>
+	<div class="script-controls">
 		<label for="ex_label">Name:</label>
 		<input id="ex_label"></select>
 	</div>
 	<div id="script-body">
-		<h5>Editor:</h5>
+		<label for="ex_editor">Editor:</label>
 		<textarea id="ex_editor" placeholder="[mm:ss]-[mm:ss] <count>x <speed>%"></textarea>
 	</div>
-	<div id="ex_buttons">
-		<button type="button" id="ex_run">&#9658;</button>
-		<button type="button" id="ex_stop">&#9632;</button>
+	<div>
+	</div>
+	<div>&nbsp;</div>
+	<div class="ex_buttons">
+		<button type="button" id="ex_run">RUN</button>
+		<button type="button" id="ex_stop">CANCEL</button>
 		<button type="button" id="ex_save">SAVE</button>
 		<button type="button" id="ex_delete">DELETE</button>
+	</div>
+	<div>&nbsp;</div>
+	<div>
+		<button type="button" id="ex_play"></button>
 	</div>
 </div>
 </body>

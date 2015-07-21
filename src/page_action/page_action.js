@@ -2,13 +2,27 @@ document.addEventListener("DOMContentLoaded", function(event) {
 	// http://stackoverflow.com/a/3560038
 	var imgURL = chrome.extension.getURL("icons/icon48.png");
 	document.getElementById("logo").src = imgURL;
-
+	
 	var select = document.getElementById("ex_select");
 	var script_name = document.getElementById("ex_label");
 	var script_text = document.getElementById("ex_editor");
-
+	
 	var current_tab = null;
-
+	
+	var play_symbol = "\u25B6";
+	var pause_symbol = "\u25AE\u25AE";
+	chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+		chrome.tabs.sendMessage(
+			tabs[0].id, { 
+				action: "is_paused"
+			}, function(response) {
+				console.log(response);
+				var innerHTML = (response.is_paused) ? play_symbol : pause_symbol;
+				document.getElementById("ex_play").innerHTML = innerHTML;
+			}
+		);
+	});
+	
 	function get_video_id(url) {
 		var v = null;
 		url.slice(url.indexOf("?") + 1).split("&").forEach(function(param) {
@@ -17,7 +31,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 		});
 		return v;
 	}
-
+	
 	// init
 	chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
 		console.log("init >");
@@ -38,7 +52,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 			}
 		});
 	});
-
+	
 	function get_popup_data() {
 		var idx = select.selectedIndex;
 		return {
@@ -47,13 +61,13 @@ document.addEventListener("DOMContentLoaded", function(event) {
 			"script_text": script_text.value
 		};
 	}
-
+	
 	function add_option(text) {
 		var option = document.createElement("option");
 		option.text = text;
 		select.add(option);
 	}
-
+	
 	select.onchange = function(event) {
 		console.log("onchange >");
 		var key = get_video_id(current_tab.url);
@@ -67,7 +81,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 			script_text.value = obj[key]["scripts"][event.target.value];
 		});
 	};
-
+	
 	document.getElementById("ex_stop").onclick = function(event) {
 		var message = {
 			action: "eval_clear"
@@ -76,7 +90,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 			chrome.tabs.sendMessage(tabs[0].id, message, function(response) {});
 		});
 	};
-
+	
 	document.getElementById("ex_run").onclick = function(event) {
 		var message = {
 			action: "eval_exscript",
@@ -86,7 +100,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 			chrome.tabs.sendMessage(tabs[0].id, message, function(response) {});
 		});
 	};
-
+	
 	document.getElementById("ex_save").onclick = function(event) {
 		console.log("save >");
 		var key = get_video_id(current_tab.url);
@@ -105,7 +119,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 			});
 		});
 	};
-
+	
 	document.getElementById("ex_delete").onclick = function(event) {
 		var key = get_video_id(current_tab.url);
 		var query = {};
@@ -126,6 +140,20 @@ document.addEventListener("DOMContentLoaded", function(event) {
 					script_text.value = "";
 				}
 			});
+		});
+	};
+	
+	document.getElementById("ex_play").onclick = function(event) {
+		var message = {};
+		if (event.target.innerHTML === play_symbol) {
+			event.target.innerHTML = pause_symbol;
+			message["action"] = "toggle_play";
+		} else {
+			event.target.innerHTML = play_symbol;
+			message["action"] = "toggle_pause";
+		}
+		chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+			chrome.tabs.sendMessage(tabs[0].id, message, function(response) {});
 		});
 	};
 });
