@@ -28,7 +28,12 @@ document.addEventListener("DOMContentLoaded", function(event) {
 		);
 	});
 	
-	// get the URL for this video to store corresponding scripts by id
+	/**
+	 * Get the URL for this video to store corresponding scripts by ID.
+	 *
+	 * @param url {string} the URL
+	 * @return {string} the v parameter
+	 */
 	function get_video_id(url) {
 		var v = null;
 		url.slice(url.indexOf("?") + 1).split("&").forEach(function(param) {
@@ -36,6 +41,31 @@ document.addEventListener("DOMContentLoaded", function(event) {
 			v = (tokens[0] == "v") ? tokens[1] : v;
 		});
 		return v;
+	}
+	
+	/**
+	 * Get popup data from UI controls.
+	 *
+	 * @return {object} the popup data object
+	 */
+	function get_popup_data() {
+		var idx = select.selectedIndex;
+		return {
+			"selected": (idx > -1) ? select.options[idx].value : null,
+			"script_name": script_name.value,
+			"script_text": script_text.value
+		};
+	}
+	
+	/**
+	 * Add an option to the select UI.
+	 *
+	 * @param {string} the option text
+	 */
+	function add_option(text) {
+		var option = document.createElement("option");
+		option.text = text;
+		select.add(option);
 	}
 	
 	// initialize the popup
@@ -62,27 +92,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
 			}
 		});
 	});
-	
-	/**
-	 * Get popup data from UI controls.
-	 */
-	function get_popup_data() {
-		var idx = select.selectedIndex;
-		return {
-			"selected": (idx > -1) ? select.options[idx].value : null,
-			"script_name": script_name.value,
-			"script_text": script_text.value
-		};
-	}
-	
-	/**
-	 * Add an option to the select UI.
-	 */
-	function add_option(text) {
-		var option = document.createElement("option");
-		option.text = text;
-		select.add(option);
-	}
 	
 	// initialize editor on selection of a script from the select UI
 	select.onchange = function(event) {
