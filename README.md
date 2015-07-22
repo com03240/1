@@ -12,7 +12,7 @@ The Chrome extension popup contains four sections: script, name, editor, and con
   1. The script dropdown selects previously saved scripts.
   2. The name text enables the user to name or rename a script.
   3. The editor is a textarea to define the script.
-  4. The controls enable the user to run, save, cancel, or delete a script and play/pause the video.
+  4. The controls enable the user to run, cancel, save, or delete a script and play/pause the video.
 
 ![alt tag](https://raw.githubusercontent.com/dantony/exscript/master/ex_extension.PNG)
 
@@ -45,6 +45,7 @@ Speed:
 Other:
 * To include comments, prefix with a # symbol.
 * To include multiple loops on a single line, use a semicolon.
+* The script parser simply ignores invalid lines, so there is no error reporting (for now)...
 
 ## Example
 Script:  
@@ -55,5 +56,4 @@ Translation:
   Play from 00:50 to 01:10 5 times at 75% speed.  
   Then skip to and play from 02:00 and 3:30 10 times at 100% speed.  
   Then continue playing at normal speed for the rest of the video.  
-
 
