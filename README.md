@@ -2,6 +2,8 @@
 
 This is a Chrome extension to automate YouTube playback with a scripting language.
 
+![alt tag](https://raw.githubusercontent.com/dantony/exscript/master/icons/icon128.png)
+
 ## Intro
 *Ex-* Script is a scripting language to specify loop playback for HTML5 video tags. The Chrome extension enables the user to write and execute scripts for YouTube videos. Practicing with a metronome is boring. For this reason, the language facilitates practicing different sections of a video according to the loops specified in the script. [Young Guitar Magazine](http://youngguitar.jp/) inspired the development and naming of this extension. They provide demonstration videos with breakdowns of solos and phrases at various speeds. Each exercise begins with an *Ex-*# label.
 
