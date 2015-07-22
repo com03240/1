@@ -24,6 +24,8 @@ chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
 	} else if (message.action === "exec_clear") {
 		// clear currently executing script thread
 		exec_clear();
+		// reset rate
+		video.playbackRate = 1;
 	} else if (message.action === "is_paused") {
 		// check for paused
 		sendResponse({ is_paused: video.paused });

@@ -12,7 +12,7 @@ The Chrome extension popup contains four sections: script, name, editor, and con
   1. The script dropdown selects previously saved scripts.
   2. The name text enables the user to name or rename a script.
   3. The editor is a textarea to define the script.
-  4. The controls enable the user to run, save, clear, or delete a script and play/pause the video.
+  4. The controls enable the user to run, save, cancel, or delete a script and play/pause the video.
 
 ## Features
 * Loop (noncontiguous) sections of a video.
@@ -52,3 +52,6 @@ Script:
 Translation:  
   Play from 00:50 to 01:10 5 times at 75% speed.  
   Then skip to and play from 02:00 and 3:30 10 times at 100% speed.  
+  Then continue playing at normal speed for the rest of the video.  
+
+

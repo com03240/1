@@ -127,6 +127,7 @@ function exec_exscript(commands, video) {
 					console.log("exec_exscript > done");
 					// done!
 					exec_clear();
+					video.playbackRate = 1;
 				} else {
 					// update video properties
 					video.currentTime = commands[0].time1;
