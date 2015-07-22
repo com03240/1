@@ -14,6 +14,8 @@ The Chrome extension popup contains four sections: script, name, editor, and con
   3. The editor is a textarea to define the script.
   4. The controls enable the user to run, save, cancel, or delete a script and play/pause the video.
 
+![alt tag](https://raw.githubusercontent.com/dantony/exscript/master/ex_extension.PNG)
+
 ## Features
 * Loop (noncontiguous) sections of a video.
 * Set the number of loops.
