@@ -1,11 +1,12 @@
 {
-	"name": "ExScript",
+	"name": "Ex- Script",
 	"version": "0.0.1",
 	"manifest_version": 2,
-	"description": "Auto-repeat and speed-adjust your youtube viewing experience",
+	"description": "Ex- Script is a scripting language to automate loop and speed playback of HTML5 video...",
 	"homepage_url": "http://github.com/dantony/exscript",
 	"icons": {
 		"16": "icons/icon16.png",
+		"19": "icons/icon19.png",
 		"48": "icons/icon48.png",
 		"128": "icons/icon128.png"
 	},
@@ -19,8 +20,6 @@
 		"default_popup": "src/page_action/page_action.html"
 	},
 	"permissions": [
-		"clipboardRead",
-		"clipboardWrite",
 		"storage",
 		"tabs"
 	],

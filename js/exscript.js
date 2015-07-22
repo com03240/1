@@ -7,10 +7,13 @@
  */
 function process_time(token) {
 	var seconds = 0;
+	// split
 	var subtokens = token.split(":").map(function(e) {
+		// convert empty strings to 0
 		return e === "" ? 0 : e;
 	});
 	console.log("process_time > " + subtokens);
+	// only convert up to hours
 	switch(subtokens.length) {
 		case 1:
 			seconds += parseInt(subtokens[0]);
@@ -30,8 +33,9 @@ function process_time(token) {
 
 /**
  * Validate the command object.
- *
- * @param {Object} the command object
+ * Command object is valid if not undefined and time range is positive.
+ * 
+ * @param {object} the command object
  * @return {boolean} the result: true = valid, false = invalid
  */
 function is_valid_command(command) {
@@ -99,6 +103,7 @@ var eval_interval = false;
  * 
  * @param {array} the stack of command objects
  * @param {tag} the HTML5 video tag
+ * @return {interval} the execution thread
  */
 function exec_exscript(commands, video) {
 	// update video properties
@@ -107,14 +112,20 @@ function exec_exscript(commands, video) {
 	eval_interval = setInterval(function() {
 		// process video state
 		if (video.currentTime > commands[0].time2) {
-			console.log("exec_exscript > loops = " + commands[0].loops);
+			console.log("exec_exscript > loop " + commands[0].loops + " complete!");
+			// check additional loops
 			if (--(commands[0].loops) > 0) {
+				// loop!
 				video.currentTime = commands[0].time1;
 			}
+			// no more loops for current command object
 			else {
+				// remove command object
 				commands.shift();
+				// check additional command objects
 				if (commands.length === 0) {
 					console.log("exec_exscript > done");
+					// done!
 					exec_clear();
 				} else {
 					// update video properties
@@ -129,6 +140,8 @@ function exec_exscript(commands, video) {
 
 /**
  * Clear execution thread.
+ *
+ * @return {interval} the execution thread
  */
 function exec_clear() {
 	clearInterval(eval_interval);
