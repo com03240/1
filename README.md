@@ -1,13 +1,13 @@
 # *Ex-* Script
 
-This is a Chrome extension to automate YouTube playback with a scripting language.
+This is a Chrome extension to automate YouTube playback with a custom scripting language.
 
 ![icon128.png](https://raw.githubusercontent.com/dantony/exscript/master/icons/icon128.png)
 
 ## Intro
-Practicing with a metronome is boring. For this reason, the language facilitates practicing different sections of a video according to the loops specified in a script. *Ex-* Script is a scripting language to specify loop playback for HTML5 video tags. The Chrome extension enables the user to write and execute scripts for YouTube videos.  
+Practicing with a metronome is boring. For this reason, this language and extension facilitates practicing different sections of a video according to the loops specified in a script. *Ex-* Script is a scripting language to specify loop playback for HTML5 video tags. The Chrome extension enables the user to write and execute scripts for YouTube videos.  
 
-There are sites, apps, and extensions that allow the user to loop a portion of a YouTube video, or repeat one nonstop. The advantage of this extension is that it allows the user to stay within the YouTube site and loop multiple portions of a video automatically. This allows the user to focus on practicing their instrument at various speeds without having to manually restart the video at specific points.
+There are sites, apps, and extensions that allow the user to loop a portion of a YouTube video, or repeat nonstop. The advantage of this extension is that it allows the user to stay within the YouTube site and loop multiple portions of a video automatically. This allows the user to focus on practicing their instrument at various speeds without having to manually restart the video at specific points.
 
 [Young Guitar Magazine](http://youngguitar.jp/) inspired the development and naming of this extension. They provide demonstration videos with breakdowns of solos and phrases at various speeds. Each exercise begins with an *Ex-*# label. 
 
@@ -65,6 +65,6 @@ Translation:
 * Then, continue playing the video at normal speed.  
 
 # Attribution
-* *Ex-* Script is The MIT License (MIT) Copyright (c) 2015 [dantony](https://github.com/dantony/)/[dkurucz](https://github.com/dkurucz/).
+* *Ex-* Script is under The MIT License (MIT) Copyright (c) 2015 [dantony](https://github.com/dantony/)/[dkurucz](https://github.com/dkurucz/).
 * Chrome and YouTube are trademarks of Google Inc. Use of this trademark is subject to Google Permissions.
-* Young Guitar Magazine is Copyright (C)2015 SHINKO MUSIC ENTERTAINMENT.CO.,LTD.
+* Young Guitar Magazine Copyright (C)2015 SHINKO MUSIC ENTERTAINMENT.CO.,LTD.
