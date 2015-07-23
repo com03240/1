@@ -59,11 +59,12 @@ Script:
   <code>4:08-4:20 2x 85%</code>  
 
 Translation:  
-  Play from 3:17 to 3:40 twice at normal speed.  
-  Then, skip to and play from 3:40 to 3:50 four times at 75% speed.  
-  Then, skip to and play from 4:08 to 4:20 twice at 85% speed.  
-  Then, continue playing the video at normal speed.  
+* Play from 3:17 to 3:40 twice at normal speed.  
+* Then, skip to and play from 3:40 to 3:50 four times at 75% speed.  
+* Then, skip to and play from 4:08 to 4:20 twice at 85% speed.  
+* Then, continue playing the video at normal speed.  
 
 # Attribution
-Chrome and YouTube are trademarks of Google Inc. Use of this trademark is subject to Google Permissions.
-Young Guitar Magazine is Copyright (C) of SHINKO MUSIC ENTERTAINMENT.CO.,LTD.
+* *Ex-* Script is The MIT License (MIT) Copyright (c) 2015 [dantony](https://github.com/dantony/)/[dkurucz](https://github.com/dkurucz/).
+* Chrome and YouTube are trademarks of Google Inc. Use of this trademark is subject to Google Permissions.
+* Young Guitar Magazine is Copyright (C)2015 SHINKO MUSIC ENTERTAINMENT.CO.,LTD.
