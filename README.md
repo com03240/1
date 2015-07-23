@@ -66,4 +66,4 @@ Translation:
 
 # Attribution
 Chrome and YouTube are trademarks of Google Inc. Use of this trademark is subject to Google Permissions.
-
+Young Guitar Magazine is Copyright (C) of SHINKO MUSIC ENTERTAINMENT.CO.,LTD.
