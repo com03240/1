@@ -60,8 +60,8 @@ Script:
 
 Translation:  
   Play from 3:17 to 3:40 twice at normal speed.  
-  Then, skip to and play from 3:40 to 3:50 four times at 75% speed. 
-  Then, skip to and play from 4:08 to 4:20 twice at 85% speed.   
+  Then, skip to and play from 3:40 to 3:50 four times at 75% speed.  
+  Then, skip to and play from 4:08 to 4:20 twice at 85% speed.  
   Then, continue playing the video at normal speed.  
 
 # Attribution
