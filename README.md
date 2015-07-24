@@ -64,7 +64,14 @@ Translation:
 * Then, skip to and play from 4:08 to 4:20 twice at 85% speed.  
 * Then, continue playing the video at normal speed.  
 
+# Note
+This is a work in progress so your feedback is much appreciated, thank you!
+
 # Attribution
 * *Ex-* Script is under The MIT License (MIT) Copyright (c) 2015 [dantony](https://github.com/dantony/)/[dkurucz](https://github.com/dkurucz/).
 * Chrome and YouTube are trademarks of Google Inc. Use of these trademarks are subject to Google Permissions.
 * Young Guitar Magazine Copyright (C)2015 SHINKO MUSIC ENTERTAINMENT.CO.,LTD.
+* YouTube videos of screenshot: Kelly Simonz EX-71 (https://www.youtube.com/watch?v=Rj-zD74f_q4)
+* YouTube videos of screenshot: Syu Super Crying Seminar (https://www.youtube.com/watch?v=3BDaiNT8quM)
+
+
