@@ -1,7 +1,7 @@
 {
 	"name": "Ex- Script",
 	"short_name": "Ex- Script",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"manifest_version": 2,
 	"description": "This is a Chrome extension to automate YouTube playback with a custom scripting language...",
 	"homepage_url": "http://github.com/dantony/exscript",
