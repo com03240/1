@@ -1,8 +1,9 @@
 {
 	"name": "Ex- Script",
+	"short_name": "Ex- Script",
 	"version": "0.0.1",
 	"manifest_version": 2,
-	"description": "Ex- Script is a scripting language to automate loop and speed playback of HTML5 video...",
+	"description": "This is a Chrome extension to automate YouTube playback with a custom scripting language...",
 	"homepage_url": "http://github.com/dantony/exscript",
 	"icons": {
 		"16": "icons/icon16.png",
