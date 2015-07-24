@@ -66,5 +66,5 @@ Translation:
 
 # Attribution
 * *Ex-* Script is under The MIT License (MIT) Copyright (c) 2015 [dantony](https://github.com/dantony/)/[dkurucz](https://github.com/dkurucz/).
-* Chrome and YouTube are trademarks of Google Inc. Use of this trademark is subject to Google Permissions.
+* Chrome and YouTube are trademarks of Google Inc. Use of these trademarks are subject to Google Permissions.
 * Young Guitar Magazine Copyright (C)2015 SHINKO MUSIC ENTERTAINMENT.CO.,LTD.

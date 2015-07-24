@@ -106,12 +106,19 @@ var eval_interval = false;
  * @return {interval} the execution thread
  */
 function exec_exscript(commands, video) {
+	var duration = video.duration;
+	console.log("exec_exscript > duration = " + duration);
+	// edge cases
+	commands[0].time1 = commands[0].time1 < 0 ? 0 : commands[0].time1;
+	commands[0].time2 = commands[0].time2 > duration ? duration : commands[0].time2;
 	// update video properties
 	video.currentTime = commands[0].time1;
 	video.playbackRate = commands[0].speed;
+	// log
+	console.log("exec_exscript > command = " + JSON.stringify(commands[0]));
 	eval_interval = setInterval(function() {
 		// process video state
-		if (video.currentTime > commands[0].time2) {
+		if (video.currentTime >= commands[0].time2) {
 			console.log("exec_exscript > loop " + commands[0].loops + " complete!");
 			// check additional loops
 			if (--(commands[0].loops) > 0) {
@@ -129,9 +136,14 @@ function exec_exscript(commands, video) {
 					exec_clear();
 					video.playbackRate = 1;
 				} else {
+					// edge cases
+					commands[0].time1 = commands[0].time1 < 0 ? 0 : commands[0].time1;
+					commands[0].time2 = commands[0].time2 > duration ? duration : commands[0].time2;
 					// update video properties
 					video.currentTime = commands[0].time1;
 					video.playbackRate = commands[0].speed;
+					// log
+					console.log("exec_exscript > command = " + JSON.stringify(commands[0]));
 				}
 			}
 		}
