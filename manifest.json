@@ -1,6 +1,6 @@
 {
-	"name": "Ex- Script",
-	"short_name": "Ex- Script",
+	"name": "Visual Ex- Script",
+	"short_name": "vexscript",
 	"version": "0.0.2",
 	"manifest_version": 2,
 	"description": "This is a Chrome extension to automate YouTube playback with a custom scripting language...",
