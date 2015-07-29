@@ -29,7 +29,12 @@
 			"matches": [
 				"https://www.youtube.com/*"
 			],
+			"css": [
+				"js/jquery-ui-1.11.4/jquery-ui.css"
+			],
 			"js": [
+				"js/jquery-2.1.4.js",
+				"js/jquery-ui-1.11.4/jquery-ui.js",
 				"js/exscript.js",
 				"src/inject/inject.js"
 			]

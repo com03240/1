@@ -1,34 +1,46 @@
-label {
-	font-weight: bold;
+#viewport {
+	width: 500px;
+	height: 500px;
 }
 
-.script-controls > select, .script-controls > input {
+#addcmd {
+	width: 100%;
+}
+
+#templatecmd {
+	display: none;
+}
+
+.command {
+	width: 100%;
+}
+
+.time1 {
+	width: 10%;
+}
+
+.time2 {
+	width: 10%;
+}
+
+.slider-range {
+	width: 30%;
 	display: inline-block;
-	width: 100%;
 }
 
-.ex_buttons {
-	text-align: center;
+.reps {
+	width: 10%;
 }
 
-#title {
-	text-align: center;
+.rate {
+	width: 10%;
 }
 
-#ex_viewport {
-	width: 250px;
+.playcmd {
+	width: 5%;
 }
-
-#ex_editor {
-	width: 100%;
-	height: 100px;
-	font-family: monospace;
-}
-
-#ex_play {
-	display: block;
-	width: 100%;
-	text-align: center;
+.delcmd {
+	width: 5%;
 }
 
 
