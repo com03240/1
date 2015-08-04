@@ -1,46 +1,47 @@
+ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+
 #viewport {
 	width: 500px;
-	height: 500px;
 }
 
 #addcmd {
 	width: 100%;
 }
 
-#templatecmd {
+#commands {
+	height: 250px;
+	overflow: scroll;
+}
+
+#templatecmd > * {
 	display: none;
 }
 
 .command {
-	width: 100%;
 }
 
 .time1 {
-	width: 10%;
 }
 
 .time2 {
-	width: 10%;
 }
 
 .slider-range {
-	width: 30%;
-	display: inline-block;
 }
 
-.reps {
-	width: 10%;
+.loop {
 }
 
 .rate {
-	width: 10%;
 }
 
 .playcmd {
-	width: 5%;
 }
 .delcmd {
-	width: 5%;
 }
 
 
