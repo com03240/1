@@ -17,8 +17,9 @@ $(document).ready(function(){
 	*/
 	
 	$("#commands").sortable();
+	$("#commands").disableSelection();
 	
-	$("#addcmd").click(function(event) {
+	$("#command-add").button().click(function(event) {
 		// clone command template and make visible
 		var id_suffix = $(".command").size();
 		var cmd = $("#command-template").clone();
@@ -59,63 +60,32 @@ $(document).ready(function(){
 
 function on_change(event, ui) {
 	var tokens = event.target.id.split("_");
-	
-	var t0 = timespinner_parse(event.target.value);
 	var t1 = $("#time1_" + tokens[1]).timespinner("value");
 	var t2 = $("#time2_" + tokens[1]).timespinner("value");
 	var tm = $("#slider-range_" + tokens[1]).slider("option", "max");
 	
-	if (tokens[0] == "time1") {
-		if (0 <= t0 && t1 <= t2) {
-			$("#slider-range_" + tokens[1]).slider("values", 0, t0);
-			$("#time1_" + tokens[1]).timespinner("value", t0);
-		} else {
-			$("#time1_" + tokens[1]).timespinner(
-				"value", 
-				$("#slider-range_" + tokens[1]).slider("values", 0)
-			);
-		}
+	var h = tokens[0] == "time1" ? 0 : 1;
+	var v = timespinner_parse(event.target.value);
+	if (!(h == 0 && 0 <= v && v <= t2 || h == 1 && t1 <= v && v <= tm)) {
+		v = $("#slider-range_" + tokens[1]).slider("values", h);
 	}
-	if (tokens[0] == "time2") {
-		if (t1 <= t0 && t0 <= tm) {
-			$("#slider-range_" + tokens[1]).slider("values", 1, t0);
-			$("#time2_" + tokens[1]).timespinner("value", t0);
-		} else {
-			$("#time2_" + tokens[1]).timespinner(
-				"value", 
-				$("#slider-range_" + tokens[1]).slider("values", 1)
-			);
-		}
-	}
+	$("#slider-range_" + tokens[1]).slider("values", h, v);
+	$("#" + event.target.id).timespinner("value", v);
 }
 
 // http://stackoverflow.com/a/21025562
 // http://stackoverflow.com/a/13250459
 function on_spin(event, ui) {
 	var tokens = $(this).attr("id").split("_");
-	var t0 = ui.value;
 	var t1 = $("#time1_" + tokens[1]).timespinner("value");
 	var t2 = $("#time2_" + tokens[1]).timespinner("value");
-	var value = -1;
-	var handle = -1;
-	if (tokens[0] == "time1") {
-		if (t0 <= t2) {
-			value = t0;
-			handle = 0;
-		} else {
-			event.preventDefault();
-		}
-	}
-	if (tokens[0] == "time2") {
-		if (t1 <= t0) {
-			value = t0;
-			handle = 1;
-		} else {
-			event.preventDefault();
-		}
-	}
-	if (value > -1) {
-		$("#slider-range_" + tokens[1]).slider("values", handle, value);
+	
+	var h = tokens[0] == "time1" ? 0 : 1;
+	var v = ui.value;
+	if (h == 0 && v <= t2 || h == 1 && t1 <= v) {
+		$("#slider-range_" + tokens[1]).slider("values", h, v);
+	} else {
+		event.preventDefault();
 	}
 }
 
