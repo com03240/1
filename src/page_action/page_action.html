@@ -11,17 +11,16 @@
 </head>
 	<body>
 		<div id="viewport">
-			<div id="commands"></div>
 			<button id="addcmd">ADD COMMAND</button>
+			<div id="commands"></div>
 			<!-- command template -->
-			<div id="templatecmd">
+			<div id="command-template">
 				<input class="time1">
-				<input class="time2">
 				<div class="slider-range"></div>
-				<input class="loop" value=1 min=1>
+				<input class="time2">
+				<input class="reps" value=1 min=1>
 				<input class="rate" value=100 min=50 max=400>
-				<button class="playcmd">></button>
-				<button class="delcmd">-</button>
+				<input class="activate" type="checkbox" checked>
 			<div>
 		</div>
 	</body>

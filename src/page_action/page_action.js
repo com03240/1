@@ -16,10 +16,12 @@ $(document).ready(function(){
 		});
 	*/
 	
+	$("#commands").sortable();
+	
 	$("#addcmd").click(function(event) {
 		// clone command template and make visible
 		var id_suffix = $(".command").size();
-		var cmd = $("#templatecmd").clone();
+		var cmd = $("#command-template").clone();
 		cmd.addClass("command");
 		cmd.css("display", true);
 		cmd.attr("id", cmd.attr("class") + "_" + id_suffix);
@@ -47,8 +49,8 @@ $(document).ready(function(){
 			values: [video_data * 0.25, video_data * 0.75],
 			slide: on_slide
 		});
-		// initialize loop spinner
-		cmd.children(".loop").loopspinner();
+		// initialize reps spinner
+		cmd.children(".reps").loopspinner();
 		// initialize rate spinner
 		cmd.children(".rate").ratespinner();
 		cmd.appendTo("#commands");
@@ -87,12 +89,6 @@ function on_change(event, ui) {
 	}
 }
 
-function on_slide(event, ui) {
-	var tokens = event.target.id.split("_");
-	$("#time1_" + tokens[1]).timespinner("value", ui.values[0]);
-	$("#time2_" + tokens[1]).timespinner("value", ui.values[1]);
-}
-
 // http://stackoverflow.com/a/21025562
 // http://stackoverflow.com/a/13250459
 function on_spin(event, ui) {
@@ -121,6 +117,12 @@ function on_spin(event, ui) {
 	if (value > -1) {
 		$("#slider-range_" + tokens[1]).slider("values", handle, value);
 	}
+}
+
+function on_slide(event, ui) {
+	var tokens = event.target.id.split("_");
+	$("#time1_" + tokens[1]).timespinner("value", ui.values[0]);
+	$("#time2_" + tokens[1]).timespinner("value", ui.values[1]);
 }
 
 
