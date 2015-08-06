@@ -11,8 +11,12 @@
 </head>
 	<body>
 		<div id="viewport">
+			<button id="script-run">run</button>
+			<button id="script-cancel">cancel</button>
+			<button id="command-add">add</button>
+			<button id="command-remove">remove</button>
+			<button id="command-invert">invert</button>
 			<div id="commands"></div>
-			<button id="command-add">ADD COMMAND</button>
 			<!-- command template -->
 			<div id="command-template">
 				<input class="time1">
@@ -20,7 +24,7 @@
 				<input class="time2">
 				<input class="reps" value=1 min=1>
 				<input class="rate" value=100 min=50 max=400>
-				<input class="activate" type="checkbox" checked>
+				<input type="checkbox" checked>
 			<div>
 		</div>
 	</body>

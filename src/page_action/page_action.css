@@ -1,9 +1,13 @@
-#viewport {
-	width: 1000px;
+button {
+	width: 15%;
 }
 
-#command-add {
-	width: 100%;
+#viewport {
+	width: 750px;
+}
+
+#scripts {
+	width: 10%
 }
 
 #commands {

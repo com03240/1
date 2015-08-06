@@ -1,3 +1,8 @@
+// the thread that executes the script
+var exec_interval = null;
+// the currently executing command
+var exec_script = null;
+
 /**
  * Convert the time token into seconds.
  * The token may specify seconds up to the number of hours.
@@ -95,9 +100,6 @@ function parse_exscript(script) {
 	return commands;
 }
 
-// the thread that executes the script
-var eval_interval = false;
-
 /**
  * Execute the command object stack.
  * 
@@ -106,17 +108,16 @@ var eval_interval = false;
  * @return {interval} the execution thread
  */
 function exec_exscript(commands, video) {
+	// current script
+	exec_script = commands;
+	// update video properties
 	var duration = video.duration;
 	console.log("exec_exscript > duration = " + duration);
-	// edge cases
-	commands[0].time1 = commands[0].time1 < 0 ? 0 : commands[0].time1;
-	commands[0].time2 = commands[0].time2 > duration ? duration : commands[0].time2;
-	// update video properties
 	video.currentTime = commands[0].time1;
 	video.playbackRate = commands[0].speed;
 	// log
 	console.log("exec_exscript > command = " + JSON.stringify(commands[0]));
-	eval_interval = setInterval(function() {
+	exec_interval = setInterval(function() {
 		// process video state
 		if (video.currentTime >= commands[0].time2) {
 			console.log("exec_exscript > loop " + commands[0].loops + " complete!");
@@ -136,9 +137,6 @@ function exec_exscript(commands, video) {
 					exec_clear();
 					video.playbackRate = 1;
 				} else {
-					// edge cases
-					commands[0].time1 = commands[0].time1 < 0 ? 0 : commands[0].time1;
-					commands[0].time2 = commands[0].time2 > duration ? duration : commands[0].time2;
 					// update video properties
 					video.currentTime = commands[0].time1;
 					video.playbackRate = commands[0].speed;
@@ -148,7 +146,7 @@ function exec_exscript(commands, video) {
 			}
 		}
 	}, 250);
-	return eval_interval;
+	return exec_interval;
 }
 
 /**
@@ -157,8 +155,9 @@ function exec_exscript(commands, video) {
  * @return {interval} the execution thread
  */
 function exec_clear() {
-	clearInterval(eval_interval);
-	eval_interval = false;
+	clearInterval(exec_interval);
+	exec_interval = null;
+	exec_script = null;
 }
 
 
