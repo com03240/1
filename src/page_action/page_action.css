@@ -1,9 +1,9 @@
-button {
-	width: 15%;
-}
-
 input[type="checkbox"] {
 	vertical-align: middle;
+}
+
+button {
+	width: 12%;
 }
 
 #toolbar {
@@ -23,8 +23,10 @@ input[type="checkbox"] {
 	width: 750px;
 }
 
-#scripts {
-	width: 10%
+#status {
+	vertical-align: middle;
+	font-family: monospace;
+	font-size: 12px;
 }
 
 #commands {
@@ -45,6 +47,10 @@ input[type="checkbox"] {
 	text-align: center;
 }
 
+.command:nth-child(odd) {
+	background-color: skyblue;
+}
+
 .command > .ui-spinner:nth-child(-n+3) {
 	width: 15%;
 }
@@ -58,5 +64,3 @@ input[type="checkbox"] {
 .command > .ui-spinner:nth-last-of-type(-n+2) {
 	width: 10%;
 }
-
-
