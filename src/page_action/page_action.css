@@ -2,6 +2,15 @@ button {
 	width: 15%;
 }
 
+input[type="checkbox"] {
+	vertical-align: middle;
+}
+
+#toolbar {
+	text-align: center;
+	padding-bottom: 10px;
+}
+
 /* http://stackoverflow.com/a/16643042 */
 #cover {
 	position: absolute;
@@ -30,22 +39,24 @@ button {
 	display: none;
 }
 
+.command {
+	padding-top: 10px;
+	padding-bottom: 10px;
+	text-align: center;
+}
+
 .command > .ui-spinner:nth-child(-n+3) {
 	width: 15%;
 }
 
 .command > .slider-range {
-	width: 30%;
+	width: 40%;
 	display:inline-block;
 	vertical-align: middle;
 }
 
 .command > .ui-spinner:nth-last-of-type(-n+2) {
 	width: 10%;
-}
-
-input[type="checkbox"] {
-	vertical-align: middle;
 }
 
 

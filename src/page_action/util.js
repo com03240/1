@@ -8,7 +8,7 @@ function get_video_id(url) {
 	var v = null;
 	url.slice(url.indexOf("?") + 1).split("&").forEach(function(param) {
 		var tokens = param.split("=");
-		v = (tokens[0] == "v") ? tokens[1] : v;
+		v = (tokens[0] === "v") ? tokens[1] : v;
 	});
 	return v;
 }
@@ -65,7 +65,7 @@ function timespinner_parse(value) {
 	// console.log("parse > " + value);
 	if (typeof value === "string") {
 		// already a timestamp
-		if (Number(value) == value) {
+		if (Number(value) === value) {
 			return Number(value);
 		}
 		return hhmmss_to_ss(value);

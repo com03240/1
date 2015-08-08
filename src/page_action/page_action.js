@@ -16,7 +16,7 @@ $(document).ready(function(){
 		});
 	}, 250);
 	
-	$("#script-run").button({ disabled: true }).click(function(event) {
+	$("#script-run").button({icons: { primary: "ui-icon-gear" } }).click(function(event) {
 		do_save();
 		var script = commands_to_script(1);
 		$.each(script, function(i, e) { 
@@ -27,19 +27,19 @@ $(document).ready(function(){
 			chrome.tabs.sendMessage(tabs[0].id, message, function(response) {});
 		});
 	});
-	$("#script-save").button().click(do_save);
-	$("#script-cancel").button({ disabled: true }).click(function(event){
+	$("#script-save").button({icons: { primary: "ui-icon-disk" } }).click(do_save);
+	$("#script-cancel").button({icons: { primary: "ui-icon-cancel" } }).click(function(event){
 		var message = { action: $(this).attr("id") };
 		chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
 			chrome.tabs.sendMessage(tabs[0].id, message, function(response) {});
 		});
 	});
-	$("#command-add").button().click(on_click);
-	$("#command-remove").button({ disabled: true }).click(function(event){
+	$("#command-add").button({icons: { primary: "ui-icon-circle-plus" } }).click(on_click);
+	$("#command-remove").button({icons: { primary: "ui-icon-circle-plus" } }).click(function(event){
 		$(".command:has(:checked)").remove();
 		toggle_buttons();
 	});
-	$("#command-invert").button({ disabled: true }).click(function(event){
+	$("#command-invert").button({icons: { primary: "ui-icon-lightbulb" } }).click(function(event){
 		$.each($(":checkbox"), function(i, e) {
 			$(e).prop("checked", !($(e).prop("checked")));
 		});
