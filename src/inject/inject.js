@@ -10,7 +10,10 @@ chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
 	var video = document.getElementsByTagName("video")[0];
 	if (message.action === "get_video_data") {
 		// inform the page action of success
-		sendResponse({ duration: video.duration });
+		sendResponse({ 
+			duration: video.duration,
+			currentTime: video.currentTime
+		});
 	} else if (message.action === "script-run") {
 		// clear currently executing script threads
 		exec_clear();
@@ -26,6 +29,10 @@ chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
 	} else if (message.action === "get_status") {
 		sendResponse(exec_script);
 	}
+});
+
+$(window).unload(function() {
+	alert("unload");
 });
 
 

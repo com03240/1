@@ -1,4 +1,19 @@
 /**
+ * Get the URL for this video to store corresponding scripts by ID.
+ *
+ * @param url {string} the URL
+ * @return {string} the v parameter
+ */
+function get_video_id(url) {
+	var v = null;
+	url.slice(url.indexOf("?") + 1).split("&").forEach(function(param) {
+		var tokens = param.split("=");
+		v = (tokens[0] == "v") ? tokens[1] : v;
+	});
+	return v;
+}
+
+/**
  * Convert the time token into seconds.
  * The token may specify seconds up to the number of hours.
  * 

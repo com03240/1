@@ -2,6 +2,14 @@ button {
 	width: 15%;
 }
 
+/* http://stackoverflow.com/a/16643042 */
+#cover {
+	position: absolute;
+	z-index: 3;
+	background-color: rgba(100, 100, 100, 0.15);
+	display: none;
+}
+
 #viewport {
 	width: 750px;
 }
@@ -15,6 +23,7 @@ button {
 	height: 250px;
 	overflow-x: hidden;
 	overflow-y: scroll;
+	z-index: 1;
 }
 
 #command-template > * {

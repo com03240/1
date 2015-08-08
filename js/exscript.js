@@ -1,7 +1,7 @@
 // the thread that executes the script
 var exec_interval = null;
 // the currently executing command
-var exec_script = null;
+var exec_script = [];
 
 /**
  * Convert the time token into seconds.
@@ -81,18 +81,18 @@ function parse_exscript(script) {
 					command.time2 = process_time(subtokens[1]);
 				}
 			}
-			// process loops
+			// process reps
 			else if (/^\d+[xX]$/.test(token)) {
-				command.loops = parseInt(token.slice(0, token.length - 1));
+				command.reps = parseInt(token.slice(0, token.length - 1));
 			} 
-			// process speed
+			// process rate
 			else if (/^\d+%$/.test(token)) {
-				command.speed = parseInt(token.slice(0, token.length - 1)) / 100.0;
+				command.rate = parseInt(token.slice(0, token.length - 1)) / 100.0;
 			} 
 		});
 		if (is_valid_command(command)) {
-			command.speed = ("speed" in command) ? command.speed : 1;
-			command.loops = ("loops" in command) ? command.loops : 1;
+			command.rate = ("rate" in command) ? command.rate : 1;
+			command.reps = ("reps" in command) ? command.reps : 1;
 			console.log("parse_exscript > command: " + JSON.stringify(command));
 			commands.push(command);
 		}
@@ -114,19 +114,19 @@ function exec_exscript(commands, video) {
 	var duration = video.duration;
 	console.log("exec_exscript > duration = " + duration);
 	video.currentTime = commands[0].time1;
-	video.playbackRate = commands[0].speed;
+	video.playbackRate = commands[0].rate;
 	// log
 	console.log("exec_exscript > command = " + JSON.stringify(commands[0]));
 	exec_interval = setInterval(function() {
 		// process video state
 		if (video.currentTime >= commands[0].time2) {
-			console.log("exec_exscript > loop " + commands[0].loops + " complete!");
-			// check additional loops
-			if (--(commands[0].loops) > 0) {
+			console.log("exec_exscript > loop " + commands[0].reps + " complete!");
+			// check additional reps
+			if (--(commands[0].reps) > 0) {
 				// loop!
 				video.currentTime = commands[0].time1;
 			}
-			// no more loops for current command object
+			// no more reps for current command object
 			else {
 				// remove command object
 				commands.shift();
@@ -139,7 +139,7 @@ function exec_exscript(commands, video) {
 				} else {
 					// update video properties
 					video.currentTime = commands[0].time1;
-					video.playbackRate = commands[0].speed;
+					video.playbackRate = commands[0].rate;
 					// log
 					console.log("exec_exscript > command = " + JSON.stringify(commands[0]));
 				}
@@ -157,7 +157,7 @@ function exec_exscript(commands, video) {
 function exec_clear() {
 	clearInterval(exec_interval);
 	exec_interval = null;
-	exec_script = null;
+	exec_script = [];
 }
 
 
