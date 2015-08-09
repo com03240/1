@@ -50,4 +50,4 @@ This is a work in progress so your feedback is much appreciated, thank you!
 * Chrome and YouTube are trademarks of Google Inc. Use of these trademarks are subject to Google Permissions.
 * Young Guitar Magazine Copyright (C)2015 SHINKO MUSIC ENTERTAINMENT.CO.,LTD.
 * screenshot1.png: [Syu Super Crying Seminar](https://www.youtube.com/watch?v=3BDaiNT8quM)
-* screenshot2.png: [Kelly Simonz EX-71](https://www.youtube.com/watch?v=Rj-zD74f_q4)
+* screenshot2.png: [Now Your Turn - Kelly SIMONZ](https://www.youtube.com/watch?v=0zADGI5ErX8)
