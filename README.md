@@ -29,21 +29,21 @@ Note:
 * The user is able to reorder the loops by dragging.
 * This project started as a scripting language, so that is why the word "script" appears in the name.
 
-# Note
+## Note
 This is a work in progress so your feedback is much appreciated, thank you!
 
-# License
+## License
 *Ex-* Script is under The MIT License (MIT) Copyright (c) 2015
 
-# Contributors
+## Contributors
 * [dantony](https://github.com/dantony/)
 * [dkurucz](https://github.com/dkurucz/)
 
-# Libraries
+## Libraries
 * [jQuery](http://jquery.com/)
 * [jQuery UI](http://jqueryui.com/)
 
-# Attribution
+## Attribution
 * Chrome and YouTube are trademarks of Google Inc. Use of these trademarks are subject to Google Permissions.
 * Young Guitar Magazine Copyright (C)2015 SHINKO MUSIC ENTERTAINMENT.CO.,LTD.
 * YouTube videos of screenshot: [Kelly Simonz EX-71](https://www.youtube.com/watch?v=Rj-zD74f_q4)
