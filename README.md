@@ -33,7 +33,7 @@ Note:
 This is a work in progress so your feedback is much appreciated, thank you!
 
 # License
-* *Ex-* Script is under The MIT License (MIT) Copyright (c) 2015
+*Ex-* Script is under The MIT License (MIT) Copyright (c) 2015
 
 # Contributors
 * [dantony](https://github.com/dantony/)
