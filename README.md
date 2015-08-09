@@ -26,6 +26,7 @@ Buttons:
 * help: takes the user to this page
 
 Note:
+* The user may specify times in the HH:MM:SS, MM:SS, and :SS formats or simply enter the number of seconds.
 * The user is unable to edit the loops when the script is running. Cancel the run first in order to edit the loops.
 * Save the script so that the defined loops re-appear after closing the popup or navigating away from the page.
 * The user is able to reorder the loops by dragging.
