@@ -130,7 +130,7 @@ $(document).ready(function () {
 		text : false
 	}).click(function (event) {
 		chrome.tabs.create({
-			url : "https://github.com/dantony/exscript"
+			url : "https://github.com/dantony/exscript#instructions"
 		});
 	});
 	
