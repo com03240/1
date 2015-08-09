@@ -60,10 +60,11 @@ li {
 	padding-top: 10px;
 	padding-bottom: 10px;
 	text-align: center;
+	border-top: 1px solid skyblue;
 }
 
-.command:nth-child(odd) {
-	background-color: skyblue;
+.command:last-child {
+	border-bottom: 1px solid skyblue;
 }
 
 .command > .ui-spinner:nth-child(-n+3) {
