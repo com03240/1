@@ -13,6 +13,8 @@ Practicing with a metronome is boring. For this reason, this extension facilitat
 
 ![ex_extension.PNG](https://raw.githubusercontent.com/dantony/exscript/master/ex_extension.PNG)
 
+Click the add button to define a loop. The users fills-out the start and finish time in addition to the number of times to repeat and the playback rate. The checkbox disables a loop.
+
 Buttons:
 * play/pause: play or pause the video
 * run: run the current set of loops with checked checkboxes
