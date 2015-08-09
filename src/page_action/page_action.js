@@ -58,7 +58,11 @@ $(document).ready(function () {
 			active : true,
 			currentWindow : true
 		}, function (tabs) {
-			chrome.tabs.sendMessage(tabs[0].id, message, function (response) {});
+			chrome.tabs.sendMessage(tabs[0].id, message, function (response) {
+				$("#play").button("option", "icons", {
+					primary : "ui-icon-" + (response ? "play" : "pause")
+				});
+			});
 		});
 	});
 	// the button to cancel the run
@@ -105,12 +109,16 @@ $(document).ready(function () {
 			secondary : "ui-icon-triangle-1-s"
 		}
 	}).click(function () {
-		$(this).next().show().position({
-			my : "left top",
-			at : "left bottom",
-			of : this
-		});
-		return false;
+		var menu = $(this).next();
+		if (menu.is(":visible")) {
+			menu.hide();
+		} else {
+			menu.show().position({
+				my : "left top",
+				at : "left bottom",
+				of : this
+			});
+		}
 	}).next().hide().menu({
 		select : on_select
 	});

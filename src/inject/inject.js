@@ -17,6 +17,7 @@ chrome.extension.sendMessage({}, function (response) {
 				video.play();
 				// execute the script
 				exec_exscript(message.script, video);
+				sendResponse(video.paused);
 			} else if (message.action === "script-cancel") {
 				// clear currently executing script thread
 				exec_clear();
