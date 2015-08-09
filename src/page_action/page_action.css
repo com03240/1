@@ -3,7 +3,22 @@ input[type="checkbox"] {
 }
 
 button {
-	width: 12%;
+	height: 30px;
+}
+
+button[id*="-"] {
+	width: 14%;
+}
+
+li {
+	font-weight: bold;
+	color: #1c94c4;
+}
+
+.ui-menu {
+	position: absolute;
+	width: 100px;
+	z-index: 3;
 }
 
 #toolbar {

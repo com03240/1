@@ -11,6 +11,11 @@ $(document).ready(function () {
 		}, function (response) {
 			current_tab = tabs[0];
 			video_data = response;
+			// initialize play/pause
+			$("#play").button("option", "icons", {
+				primary : "ui-icon-" + (video_data.paused ? "play" : "pause")
+			});
+			// initialize commands
 			init_commands();
 		})
 	});
@@ -27,6 +32,13 @@ $(document).ready(function () {
 		});
 	}, 250);
 	
+	// the button to play or pause the video
+	$("#play").button({
+		icons : {
+			primary : "ui-icon-play"
+		},
+		text : false
+	}).click(do_play);
 	// the button to run the script
 	$("#script-run").button({
 		icons : {
@@ -80,27 +92,34 @@ $(document).ready(function () {
 	// the button to remove commands
 	$("#command-remove").button({
 		icons : {
-			primary : "ui-icon-circle-plus"
+			primary : "ui-icon-circle-minus"
 		}
 	}).click(function (event) {
 		$(".command:has(:checked)").remove();
 		toggle_buttons();
 	});
 	// the button to invert the selection
-	$("#command-invert").button({
+	$("#command-check").button({
 		icons : {
-			primary : "ui-icon-lightbulb"
+			primary : "ui-icon-circle-check",
+			secondary : "ui-icon-triangle-1-s"
 		}
-	}).click(function (event) {
-		$.each($(":checkbox"), function (i, e) {
-			$(e).prop("checked", !($(e).prop("checked")));
+	}).click(function () {
+		$(this).next().show().position({
+			my : "left top",
+			at : "left bottom",
+			of : this
 		});
+		return false;
+	}).next().hide().menu({
+		select : on_select
 	});
 	// the button for helping people who need help and want to do other stuff good too
 	$("#help").button({
 		icons : {
 			primary : "ui-icon-help"
-		}
+		},
+		text : false
 	}).click(function (event) {
 		chrome.tabs.create({
 			url : "https://github.com/dantony/exscript"
@@ -146,13 +165,13 @@ function init_command(command) {
 		max : ss_to_hhmmss(video_data.duration),
 		change : on_change,
 		spin : on_spin
-	}).val(ss_to_hhmmss(command.time1));
+	}).keyup(on_keyup).val(ss_to_hhmmss(command.time1));
 	cmd.children(".time2").timespinner({
 		min : ss_to_hhmmss(0),
 		max : ss_to_hhmmss(video_data.duration),
 		change : on_change,
 		spin : on_spin
-	}).val(ss_to_hhmmss(command.time2));
+	}).keyup(on_keyup).val(ss_to_hhmmss(command.time2));
 	// initialize slider range
 	cmd.children(".slider-range").slider({
 		range : true,
@@ -168,7 +187,7 @@ function init_command(command) {
 			value = /^\s*\d+[xX]*\s*$/.test(value) ? parseInt(value) : $(this).data("prev");
 			$(event.target).repspinner("value", value);
 		}
-	}).on('focus', function () {
+	}).keyup(on_keyup).on("focus", function () {
 		// http://stackoverflow.com/a/22386840
 		$(this).data("prev", $(this).val());
 	}).val(command.reps + "x");
@@ -179,12 +198,17 @@ function init_command(command) {
 			value = /^\s*\d+%*\s*$/.test(value) ? parseInt(value) : $(this).data("prev");
 			$(event.target).ratespinner("value", value);
 		}
-	}).on('focus', function () {
+	}).keyup(on_keyup).on("focus", function () {
 		// http://stackoverflow.com/a/22386840
 		$(this).data("prev", $(this).val());
 	}).val(command.rate + "%");
 	// register on check
-	cmd.children(":checkbox").prop("checked", command.check).change(toggle_buttons);
+	cmd.children(":checkbox").prop("checked", command.check);
+	cmd.children(":checkbox").change(toggle_buttons).keyup(function (event) {
+		if (event.keyCode === 13) {
+			$(this).trigger("click");
+		}
+	});
 	return cmd;
 }
 
@@ -239,13 +263,13 @@ function toggle_buttons() {
 		$("#cover").css("display", "none");
 		$("#script-cancel").button("disable");
 		$("#script-run, #script-save").button("enable");
-		$("#script-run, #command-add, #command-remove, #command-invert").button("enable");
+		$("#script-run, #command-add, #command-remove, #command-check").button("enable");
 	} else if ($(".command").length > 0) {
 		$("#script-save").button("enable");
 		$("#script-run, #command-remove").button("disable");
 	} else {
 		$("#script-save").button("enable");
-		$("#script-run, #command-remove, #command-invert").button("disable");
+		$("#script-run, #command-remove, #command-check").button("disable");
 	}
 }
 
@@ -267,6 +291,28 @@ function is_visible_in_scroll(elem, view) {
 	var elemBottom = elemTop + $elem.height();
 	
 	return ((elemBottom <= docViewBottom) && (elemTop >= docViewTop));
+}
+
+/**
+ * Play/pause the video and alter the UI accordingly.
+ * @param {object} the event object
+ */
+function do_play(event) {
+	var message = {
+		action : $(this).button("option", "icons").primary
+	};
+	console.log(message);
+	chrome.tabs.query({
+		active : true,
+		currentWindow : true
+	}, function (tabs) {
+		chrome.tabs.sendMessage(tabs[0].id, message, function (response) {
+			console.log("ui-icon-" + response ? "play" : "pause");
+			$("#play").button("option", "icons", {
+				primary : "ui-icon-" + (response ? "play" : "pause")
+			});
+		});
+	});
 }
 
 /**
@@ -298,7 +344,7 @@ function do_status(script) {
 		$("#cover").css("display", "block");
 		$("#script-cancel").button("enable");
 		$("#script-run, #script-save").button("disable");
-		$("#command-add, #command-remove, #command-invert").button("disable");
+		$("#command-add, #command-remove, #command-check").button("disable");
 	} else {
 		$("#status").text("");
 		toggle_buttons();
@@ -398,4 +444,35 @@ function on_click(event) {
 	cmd.appendTo("#commands");
 	// toggle buttons
 	toggle_buttons();
+}
+
+/**
+ * Validate spinner input on enter.
+ * @param {object} the event object
+ */
+function on_keyup(event) {
+	if (event.keyCode === 13) {
+		$(this).trigger("change").blur();
+	}
+}
+
+/**
+ * Check commands according to check button menu item.
+ * @param {object} the event object
+ * @param {object} the ui object
+ */
+function on_select(event, ui) {
+	var text = ui.item.text();
+	$.each($(":checkbox"), function (i, e) {
+		var value = $(e).prop("checked");
+		if (text === "all") {
+			value = true;
+		} else if (text === "none") {
+			value = false;
+		} else if (text === "invert") {
+			value = !(value);
+		}
+		$(e).prop("checked", value);
+	});
+	$(this).hide();
 }

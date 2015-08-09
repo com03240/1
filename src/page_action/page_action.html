@@ -2,23 +2,29 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<script type="text/javascript" src="../../js/jquery-2.1.4.js"></script>
-	<script type="text/javascript" src="../../js/jquery-ui-1.11.4/jquery-ui.js"></script>
+	<script type="text/javascript" src="../../js/jquery-2.1.4.min.js"></script>
+	<script type="text/javascript" src="../../js/jquery-ui-1.11.4/jquery-ui.min.js"></script>
 	<script type="text/javascript" src="util.js"></script>
 	<script type="text/javascript" src="page_action.js"></script>
-	<link rel="stylesheet" type="text/css" href="../../js/jquery-ui-1.11.4/jquery-ui.css">
+	<link rel="stylesheet" type="text/css" href="../../js/jquery-ui-1.11.4/jquery-ui.min.css">
 	<link rel="stylesheet" type="text/css" href="page_action.css">
 </head>
 	<body>
 		<div id="viewport">
 			<div id="toolbar">
+				<button id="play"></button>
 				<button id="script-run">run</button>
 				<button id="script-cancel">cancel</button>
 				<button id="script-save">save</button>
 				<button id="command-add">add</button>
 				<button id="command-remove">remove</button>
-				<button id="command-invert">invert</button>
-				<button id="help">help</button>
+				<button id="command-check">check</button>
+				<ul>
+					<li>all</li>
+					<li>none</li>
+					<li>invert</li>
+				</ul>
+				<button id="help"></button>
 			</div>
 			<div id="cover"></div>
 			<div id="commands"></div>

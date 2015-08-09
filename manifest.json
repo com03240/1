@@ -1,38 +1,37 @@
 {
-	"name": "Visual Ex- Script",
-	"short_name": "vexscript",
-	"version": "0.0.2",
-	"manifest_version": 2,
-	"description": "This is a Chrome extension to automate YouTube playback with a custom scripting language...",
-	"homepage_url": "http://github.com/dantony/exscript",
-	"icons": {
-		"16": "icons/icon16.png",
-		"19": "icons/icon19.png",
-		"48": "icons/icon48.png",
-		"128": "icons/icon128.png"
+	"name" : "Visual Ex- Script",
+	"short_name" : "vexscript",
+	"version" : "1.0.0",
+	"manifest_version" : 2,
+	"description" : "Create multiple loops for YouTube videos!",
+	"homepage_url" : "http://github.com/dantony/exscript",
+	"icons" : {
+		"16" : "icons/icon16.png",
+		"19" : "icons/icon19.png",
+		"48" : "icons/icon48.png",
+		"128" : "icons/icon128.png"
 	},
-	"default_locale": "en",
-	"background": {
-		"page": "src/bg/background.html"
+	"default_locale" : "en",
+	"background" : {
+		"page" : "src/bg/background.html"
 	},
-	"page_action": {
-		"default_icon": "icons/icon19.png",
-		"default_title": "page action demo",
-		"default_popup": "src/page_action/page_action.html"
+	"page_action" : {
+		"default_icon" : "icons/icon19.png",
+		"default_title" : "page action demo",
+		"default_popup" : "src/page_action/page_action.html"
 	},
-	"permissions": [
+	"permissions" : [
 		"storage",
 		"tabs"
 	],
-	"content_scripts": [
-		{
-			"matches": [
+	"content_scripts" : [{
+			"matches" : [
 				"https://www.youtube.com/*"
 			],
-			"css": [
+			"css" : [
 				"js/jquery-ui-1.11.4/jquery-ui.css"
 			],
-			"js": [
+			"js" : [
 				"js/jquery-2.1.4.js",
 				"js/jquery-ui-1.11.4/jquery-ui.js",
 				"js/exscript.js",
